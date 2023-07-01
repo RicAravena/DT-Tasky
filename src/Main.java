@@ -1,31 +1,33 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
 	public static void main(String[] args) {
-		int respuesta = 0;
+		String respuesta = null;
 		Scanner input = new Scanner(System.in);
-		Task tarea = new Task();
+		
+		List<Task> taskList = new ArrayList<>(); 
 		do {
-		    //System.out.print("\033[H\033[2J");  
 		    System.out.flush(); 
 			System.out.println("Tasky 1.0\n1)Crear nueva tarea\n2)Consultar tareas\n3)Salir");
 			System.out.print("\nOpcion: ");
-			respuesta = input.nextInt();
+			respuesta = input.next();
 			switch (respuesta) {
-			case 1:
+			case "1":
+				Task tarea = new Task();
 				System.out.println("Nombre de la tarea: ");
 				tarea.setTask_title(input.next());
 				System.out.println("Descripcion de la tarea: ");
 				tarea.setTask_description(input.next());
+				taskList.add(tarea);
 				break;
-			case 2:
+			case "2":
 				input.nextLine();
-				System.out.println("task_title: " + tarea.getTask_title());
-				System.out.println("task_description: " + tarea.getTask_description());
-				System.out.println("task_date: " + tarea.getTask_date());
-				System.out.println("task_priority: " + tarea.getTask_priority());
-				System.out.println("task_status: " + tarea.getTask_status());
+				for(Task task: taskList) {
+					System.out.println(task.toString());
+				}
 				System.out.println("----------------------------------------------\n"
 						+ "Presione enter para continuar...");
 				input.nextLine();
@@ -34,7 +36,7 @@ public class Main {
 				break;
 
 			}
-		} while (respuesta != 3);
+		} while (!respuesta.equals("3"));
 		System.out.println("Vuelve pronto!");
 		input.close();
 

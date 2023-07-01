@@ -1,6 +1,10 @@
 import java.util.Date;
 
 public class Task {
+	
+	private static int lastTaskId = 1;
+	
+	private int task_id;
 	private String task_title;
 	private String task_description;
 	private String task_status;
@@ -8,11 +12,16 @@ public class Task {
 	private int task_priority;
 
 	public Task() {
+		this.task_id = lastTaskId++;
 		this.task_date = new Date();
 		this.task_status = "Pending";
 		this.task_priority = 0;
 	}
 
+	public int get_Task_id() {
+		return task_id;
+	}
+	
 	public String getTask_title() {
 		return task_title;
 	}
@@ -25,6 +34,10 @@ public class Task {
 		return task_description;
 	}
 
+	public void setTask_id(int task_id) {
+		this.task_id = task_id;
+	}
+		
 	public void setTask_description(String task_description) {
 		this.task_description = task_description;
 	}
@@ -52,5 +65,17 @@ public class Task {
 	public void setTask_status(String task_status) {
 		this.task_status = task_status;
 	}
+
+	@Override
+	public String toString() {
+		return "\n\tTarea Nro: " + task_id
+				+ "\n\t" + task_title + ":"
+				+ "\n\tDescripcion tarea: " + task_description 
+				+ "\n\tEstado tarea:" + task_status 
+				+ "\n\tFecha tarea: " +  task_date
+				+ "\n\tPrioridad tarea:" + task_priority;
+	}
+	
+	
 
 }
