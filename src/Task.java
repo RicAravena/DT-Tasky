@@ -69,11 +69,11 @@ public class Task {
 	@Override
 	public String toString() {
 		return "\n\tTarea Nro: " + task_id
-				+ "\n\t" + task_title + ":"
+				+ "\n\t" + task_title + ": "
 				+ "\n\tDescripcion tarea: " + task_description 
-				+ "\n\tEstado tarea:" + task_status 
+				+ "\n\tEstado tarea: " + task_status 
 				+ "\n\tFecha tarea: " +  task_date
-				+ "\n\tPrioridad tarea:" + task_priority;
+				+ "\n\tPrioridad tarea: " + task_priority;
 	}
 	
 	
