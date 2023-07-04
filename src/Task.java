@@ -1,6 +1,10 @@
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Task {
+	
+	private static Map<Integer, Task> tasks = new HashMap<>();
 	
 	private static int lastTaskId = 1;
 	
@@ -64,6 +68,10 @@ public class Task {
 
 	public void setTask_status(String task_status) {
 		this.task_status = task_status;
+	}
+	
+	public static void deleteTask(int taskId) {
+		tasks.remove(taskId);
 	}
 
 	@Override
