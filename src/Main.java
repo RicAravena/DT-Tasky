@@ -1,18 +1,15 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
 	public static void main(String[] args) {
 		String respuesta = null;
 		Scanner input = new Scanner(System.in);
-
-		List<Task> taskList = new ArrayList<>();
 		do {
 			clearScreen();
 			System.out.flush();
-			System.out.println("Tasky 1.0\n1)Crear nueva tarea\n2)Consultar tareas\n3)Eliminar tarea\n5)Salir");
+			System.out.println(
+					"Tasky 1.0\n1)Crear nueva tarea\n2)Consultar tareas\n3)Actualizar tarea\n4)Eliminar tarea\n5)Salir");
 			System.out.print("\nOpcion: ");
 			respuesta = input.nextLine();
 			clearScreen();
@@ -24,25 +21,39 @@ public class Main {
 
 				System.out.print("Descripcion de la tarea: ");
 				tarea.setTask_description(input.nextLine());
-
-				taskList.add(tarea);
 				break;
 			case "2":
 				System.out.println("** Tareas registradas **");
-				for (Task task : taskList) {
+				for (Task task : Task.getTasks().values()) {
 					System.out.println(task.toString());
 				}
 				System.out.println(
 						"----------------------------------------------\n" + "Presione enter para continuar...");
 				input.nextLine(); // Consumir el carácter de nueva línea
 				break;
+
 			case "3":
+				System.out.println("Ingrese el numero de tarea a actualizar: ");
+				int tareaActualizar = input.nextInt();
+				input.nextLine(); // Consumir el carácter de nueva línea
+
+				System.out.println("Ingrese la nueva descripcion: ");
+				String nuevaDescripcion = input.nextLine();
+
+				String mensaje = Task.updateTaskDescripcion(tareaActualizar, nuevaDescripcion);
+				System.out.println(mensaje);
+				System.out.println(
+						"----------------------------------------------\n" + "Presione enter para continuar...");
+				input.nextLine();
+				break;
+
+			case "4":
 				System.out.print("Ingrese el numero de tarea a eliminar: ");
 				int tareaEliminar = input.nextInt();
 				input.nextLine();
-				int indiceEliminar = tareaEliminar - 1;
-				if (indiceEliminar >= 0 && indiceEliminar < taskList.size()) {
-					taskList.remove(indiceEliminar);
+				int indiceEliminar = tareaEliminar;
+				if (indiceEliminar >= 0 || indiceEliminar < Task.getTasks().size()) {
+					Task.deleteTask(indiceEliminar);
 					System.out.println("Tarea " + tareaEliminar + " eliminada exitosamente.");
 				} else {
 					System.out.println("El numero de tarea ingresado no es valido.");

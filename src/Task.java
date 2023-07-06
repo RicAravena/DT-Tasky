@@ -5,7 +5,7 @@ import java.util.Map;
 public class Task {
 	
 	private static Map<Integer, Task> tasks = new HashMap<>();
-	
+
 	private static int lastTaskId = 1;
 	
 	private int task_id;
@@ -20,6 +20,7 @@ public class Task {
 		this.task_date = new Date();
 		this.task_status = "Pending";
 		this.task_priority = 0;
+		tasks.put(this.task_id, this);
 	}
 
 	public int get_Task_id() {
@@ -70,8 +71,32 @@ public class Task {
 		this.task_status = task_status;
 	}
 	
+    public static Map<Integer, Task> getTasks() {
+        return tasks;
+    }
+	public static void addTask(Task task) {
+		tasks.put(task.get_Task_id(), task);
+	}
+	
+	
 	public static void deleteTask(int taskId) {
 		tasks.remove(taskId);
+	}
+	
+	public static String updateTaskDescripcion(Integer taskId, String newDescription) {
+		String message;
+		Task task = tasks.get(taskId);
+		if (task != null || taskId < tasks.size()) {
+			task.setTask_description(newDescription);
+			message = ("Descripcion Tarea nº:" + taskId + " Actualizada");
+		}
+
+		else {
+			message = "Numero de tarea inexistente.";
+
+		}
+
+		return message;
 	}
 
 	@Override
